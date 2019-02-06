@@ -1,37 +1,28 @@
+import * as actionTypes from './actions';
+
 const initialState = {
-  counter: 0,
-  results: []
+    persons: []
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      const newState = Object.assign({}, state);
-      newState.counter = state.counter + 1;
-      return newState;
-    case "DECREMENT":
-      return {
-        ...state,
-        counter: state.counter - 1
-      };
-    case "ADD":
-      return {
-        ...state,
-        counter: state.counter + action.val
-      };
-    case "SUBTRACT":
-      return {
-        ...state,
-        counter: state.counter - action.val
-      };
-    case "STORE-RESULT":
-      return {
-        ...state,
-        results: state.results.concat({ id: new Date(), value: state.counter })
-      };
-    default:
-  }
-  return state;
+const reducer = ( state = initialState, action ) => {
+    switch ( action.type ) {
+        case actionTypes.ADD_PERSON:
+            const newPerson = {
+                id: Math.random(), // not really unique but good enough here!
+                name: action.personData.name,
+                age: action.personData.age
+            }
+            return {
+                ...state,
+                persons: state.persons.concat( newPerson )
+            }
+        case actionTypes.REMOVE_PERSON:
+            return {
+                ...state,
+                persons: state.persons.filter(person => person.id !== action.personId)
+            }
+    }
+    return state;
 };
 
 export default reducer;
