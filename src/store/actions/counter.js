@@ -1,4 +1,4 @@
-import * as actionTypes from "./actionsTypes";
+import * as actionTypes from "./actionTypes";
 
 export const increment = () => {
   return {
@@ -23,4 +23,3 @@ export const subtract = value => {
     val: value
   };
 };
-
